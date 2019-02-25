@@ -1,0 +1,48 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: jrmarcco-api-gateway
+  cloud:
+    config:
+      discovery:
+        serviceId: jrmarcco-config-server
+        enabled: true
+      name: api-gateway, hystrix
+      label: master
+      profile: ${spring.profiles.active}
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+          lowerCaseServiceId: true
+      routes:
+        - id: auth-server
+          uri: lb://jrmarcco-auth-server
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1
+        - id: admin
+          uri: lb://jrmarcco-admin
+          predicates:
+            - Path=/admin/**
+          filters:
+            - StripPrefix=1
+
+jrmarcco:
+  gateway:
+    ignorePaths: /auth/jwt
+    tokenHeader: Access-Token
+
+---
+spring:
+  profiles: dev
+  cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+    discovery:
+      healthCheckPath: /actuator/health
+      healthCheckInterval: 15s
+      instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}

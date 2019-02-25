@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jrmarcco.user.server.mapper.SysUserMapper">
+    <resultMap id="baseResultMap" type="com.jrmarcco.user.client.entity.SysUser">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="username" jdbcType="VARCHAR" property="username" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+        <result column="gender" jdbcType="CHAR" property="gender" />
+        <result column="phoneNumber" jdbcType="VARCHAR" property="phone_number" />
+        <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+        <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="createTime" jdbcType="VARCHAR" property="create_time" />
+        <result column="updateTime" jdbcType="VARCHAR" property="update_time" />
+        <result column="isDeleted" jdbcType="CHAR" property="is_deleted" />
+    </resultMap>
+
+    <sql id="base_column_list">
+        `id`, `username`, `password`, `nickname`, `gender`, `phone_number`, `avatar`, `email`, `create_time`, `update_time`, `is_deleted`
+    </sql>
+
+    <select id="findByUsername" parameterType="java.lang.String" resultMap="baseResultMap">
+        select
+            <include refid="base_column_list" />
+        from
+            sys_user
+        where
+            username = #{username,jdbcType=VARCHAR}
+    </select>
+
+    <select id="pageSelect" parameterType="com.jrmarcco.user.client.entity.SysUser" resultMap="baseResultMap">
+        select
+            <include refid="base_column_list" />
+        from
+            sys_user
+        where
+            1 = 1
+        <if test="username != null">
+            and username like concat('%', #{username,jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="nickname != null">
+            and nickname like concat('%', #{nickname,jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="gender != null">
+            and gender = #{gender,jdbcType=CHAR}
+        </if>
+        <if test="phoneNumber != null">
+            and phone_number = #{phoneNumber,jdbcType=VARCHAR}
+        </if>
+        order by id desc
+    </select>
+</mapper>

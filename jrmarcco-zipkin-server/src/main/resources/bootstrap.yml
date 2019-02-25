@@ -1,0 +1,25 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: jrmarcco-zipkin-server
+  cloud:
+    config:
+      discovery:
+        serviceId: jrmarcco-config-server
+        enabled: true
+      name: zipkin-server
+      label: master
+      profile: ${spring.profiles.active}
+
+---
+spring:
+  profiles: dev
+  cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+    discovery:
+      healthCheckPath: /actuator/health
+      healthCheckInterval: 15s
+      instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+    <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+
+    <property name="FILENAME" value="auth-server" />
+
+    <property name="CONSOLE_PATTERN" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5.5level) %clr(${PID:- }){magenta} --- [%15.15t] %clr(%-40.40c{1.} [%4.4L]){cyan} %clr(:){faint} %msg%n%wEx" />
+    <property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level ${PID:- } --- [%t]%-40.40c{1.} : %m%n%wEx" />
+
+
+    <springProperty scope="context" name="DIR" source="log.dir" defaultValue="./logs" />
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="ERROR" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.err</target>
+        <encoder>
+            <pattern>${CONSOLE_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${DIR}/${FILENAME}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${DIR}/${FILENAME}_%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>10MB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <springProfile name="test, dev">
+        <logger name="org.hibernate.SQL" level="DEBUG" additivity="false">
+            <appender-ref ref="ERROR" />
+        </logger>
+        <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE" additivity="false">
+            <appender-ref ref="ERROR" />
+        </logger>
+        <root level="INFO">
+            <appender-ref ref="CONSOLE" />
+            <appender-ref ref="ROLLING" />
+        </root>
+    </springProfile>
+
+    <springProfile name="pre, prod">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE" />
+            <appender-ref ref="ROLLING" />
+        </root>
+    </springProfile>
+</configuration>

@@ -1,0 +1,34 @@
+server:
+  port: 18001
+spring:
+  profiles:
+    active: dev
+  application:
+    name: jrmarcco-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/JrMarcco/jrmarcco-config-server-repo.git
+          searchPaths: /*, common/*
+          username:
+          password:
+
+encrypt:
+  key-store:
+    location: classpath:config-server.jks
+    password: jrmarcco
+    alias: config-server-key
+    secret: jrmarcco
+
+---
+spring:
+  profiles: dev
+  cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+    discovery:
+      healthCheckPath: /actuator/health
+      healthCheckInterval: 15s
+      instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}

@@ -1,0 +1,38 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: jrmarcco-auth-server
+  cloud:
+    config:
+      discovery:
+        serviceId: jrmarcco-config-server
+        enabled: true
+      name: auth-server, hystrix, mybatis, redis
+      label: master
+      profile: ${spring.profiles.active}
+
+hystrix:
+  threadpool:
+    default:
+      coreSize: 100
+      maxQueueSize: 100
+      queueSizeRejectionThreshold: 50
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+
+---
+spring:
+  profiles: dev
+  cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+    discovery:
+      healthCheckPath: /actuator/health
+      healthCheckInterval: 15s
+      instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
