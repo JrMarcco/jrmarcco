@@ -23,7 +23,7 @@ public class RedisUtils {
                     .map(json -> JsonUtils.parseJson(json, cls))
                     .orElse(null);
         } catch (Exception e) {
-            log.error("### Read redis string value error，key={}，异常信息：{} ###", key, e.getMessage());
+            log.error("### Read redis string value error，key={}，exception message：{} ###", key, e.getMessage());
         }
         return null;
     }
