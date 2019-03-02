@@ -55,7 +55,7 @@ public class AuthServiceImpl implements IAuthService {
             // 缓存用户权限信息
             var permissions = validateUserResp.getPermissions();
             if (permissions != null) {
-                var key = AuthRedisConstants.getPermissionKey(user.getUsername());
+                var key = AuthRedisConstants.getPermissionKey(String.valueOf(user.getRoleId()));
                 RedisUtils.setStringValue(rt, key, permissions);
             }
 

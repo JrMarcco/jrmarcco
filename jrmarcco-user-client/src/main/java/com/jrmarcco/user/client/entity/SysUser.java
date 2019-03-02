@@ -28,6 +28,7 @@ public class SysUser implements Serializable {
     private String phoneNumber;
     private String avatar;
     private String email;
+    private Integer roleId;
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     private Date createTime;
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")

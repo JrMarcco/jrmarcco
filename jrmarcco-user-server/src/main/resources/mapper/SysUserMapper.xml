@@ -10,13 +10,14 @@
         <result column="phoneNumber" jdbcType="VARCHAR" property="phone_number" />
         <result column="avatar" jdbcType="VARCHAR" property="avatar" />
         <result column="email" jdbcType="VARCHAR" property="email" />
+        <result column="roleId" jdbcType="INTEGER" property="role_id" />
         <result column="createTime" jdbcType="VARCHAR" property="create_time" />
         <result column="updateTime" jdbcType="VARCHAR" property="update_time" />
         <result column="isDeleted" jdbcType="CHAR" property="is_deleted" />
     </resultMap>
 
     <sql id="base_column_list">
-        `id`, `username`, `password`, `nickname`, `gender`, `phone_number`, `avatar`, `email`, `create_time`, `update_time`, `is_deleted`
+        `id`, `username`, `password`, `nickname`, `gender`, `phone_number`, `avatar`, `email`, `role_id`, `create_time`, `update_time`, `is_deleted`
     </sql>
 
     <select id="findByUsername" parameterType="java.lang.String" resultMap="baseResultMap">
