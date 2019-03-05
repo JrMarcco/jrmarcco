@@ -6,7 +6,7 @@ import com.jrmarcco.auth.client.dto.ValidateTokenReq;
 import com.jrmarcco.common.base.BaseResult;
 import com.jrmarcco.common.constant.BaseConstants;
 import com.jrmarcco.common.exception.uaa.UaaError;
-import com.jrmarcco.commons.util.JsonUtils;
+import com.jrmarcco.common.util.JsonUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;

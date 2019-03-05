@@ -1,4 +1,4 @@
-package com.jrmarcco.commons.util;
+package com.jrmarcco.common.util;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;

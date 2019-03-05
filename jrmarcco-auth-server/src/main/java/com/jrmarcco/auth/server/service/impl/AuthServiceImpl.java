@@ -12,7 +12,7 @@ import com.jrmarcco.auth.server.util.JwtUtils;
 import com.jrmarcco.common.base.BaseResult;
 import com.jrmarcco.common.constant.BaseConstants;
 import com.jrmarcco.common.exception.uaa.UaaError;
-import com.jrmarcco.commons.util.RedisUtils;
+import com.jrmarcco.common.util.RedisUtils;
 import com.jrmarcco.user.client.dto.ValidateUserReq;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;

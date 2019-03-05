@@ -1,6 +1,6 @@
 package com.jrmarcco.auth.server.util;
 
-import com.jrmarcco.commons.util.DateUtils;
+import com.jrmarcco.common.util.DateUtils;
 import io.jsonwebtoken.Jwts;
 
 import java.security.PrivateKey;
