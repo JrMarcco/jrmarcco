@@ -39,7 +39,7 @@ create table `sys_user` (
     `update_time` timestamp not null default current_timestamp on update current_timestamp comment '更新时间',
     `is_deleted` char(1) not null default '0' comment '删除标记：0-正常；1-已删除',
     primary key (`id`)
-) engine=innodb default charset=utf8 comment='系统用户表';
+) engine=innodb default charset=utf8mb4 comment='系统用户表';
 
 insert into `sys_user`(`id`, `username`, `password`, `nickname`, `gender`, `role_id`) values (1, 'jrmarcco', '$2a$12$L/ciq4M/oLk4ldoeLq9PQe5JXFdguuyB6WZX8PVi93i10YR.n3Eu.', 'jrmarcco', '1', 1);
 
