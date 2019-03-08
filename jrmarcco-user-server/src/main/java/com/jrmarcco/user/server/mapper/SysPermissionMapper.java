@@ -2,7 +2,7 @@ package com.jrmarcco.user.server.mapper;
 
 import com.jrmarcco.user.client.entity.SysPermission;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author hongjc
@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface SysPermissionMapper {
 
-    List<SysPermission> findByUsername(String username);
+    Set<SysPermission> findByUsername(String username);
 }

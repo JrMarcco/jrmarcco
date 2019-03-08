@@ -77,7 +77,7 @@ public class UserServiceImpl implements IUserService {
     // ====================================================================================================
     private Set<String> getPermissions(String username) {
         return Optional.ofNullable(permissionMapper.findByUsername(username))
-                .orElse(Collections.emptyList())
+                .orElse(Collections.emptySet())
                 .stream()
                 .map(SysPermission::getUrl)
                 .collect(Collectors.toSet());

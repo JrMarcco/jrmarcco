@@ -4,6 +4,7 @@ import com.jrmarcco.auth.client.dto.FrontUser;
 import com.jrmarcco.auth.client.dto.GetTokenReq;
 import com.jrmarcco.auth.client.dto.GetTokenResp;
 import com.jrmarcco.auth.client.dto.ValidateTokenReq;
+import com.jrmarcco.auth.server.bean.JwtInfo;
 import com.jrmarcco.auth.server.constant.AuthRedisConstants;
 import com.jrmarcco.auth.server.key.JwtKey;
 import com.jrmarcco.auth.server.remote.UserRemoteApi;
@@ -62,7 +63,7 @@ public class AuthServiceImpl implements IAuthService {
             var frontUser = new FrontUser();
             BeanUtils.copyProperties(user, frontUser);
             result.setData(new GetTokenResp(
-                    JwtUtils.generateToken(user.getUsername(), jwtKey.getPrivateKey(), expire),
+                    JwtUtils.generateToken(user.getUsername(), user.getRoleId(), jwtKey.getPrivateKey(), expire),
                     frontUser
             ));
         } else {
@@ -76,11 +77,11 @@ public class AuthServiceImpl implements IAuthService {
     public BaseResult<Void> validateToken(ValidateTokenReq req) {
         var result = new BaseResult<Void>();
         try {
-            var username = JwtUtils.parseToken(req.getAccessToken(), jwtKey.getPublicKey());
-            if (StringUtils.isEmpty(username)) {
+            var jwtInfo = JwtUtils.parseToken(req.getAccessToken(), jwtKey.getPublicKey());
+            if (StringUtils.isEmpty(jwtInfo.getUsername())) {
                 result.error(UaaError.InvalidToken);
             } else {
-                var permissions = getUserPermissions(username);
+                var permissions = getUserPermissions(jwtInfo);
                 if (!hasPermission(permissions, req.getRequestUri())) {
                     result.error(UaaError.PermissionDenied);
                 }
@@ -97,11 +98,11 @@ public class AuthServiceImpl implements IAuthService {
     //                                   Private Method
     // ====================================================================================================
     @SuppressWarnings("unchecked")
-    private Set<String> getUserPermissions(String username) {
-        var  key = AuthRedisConstants.getPermissionKey(username);
+    private Set<String> getUserPermissions(JwtInfo jwtInfo) {
+        var  key = AuthRedisConstants.getPermissionKey(String.valueOf(jwtInfo.getRoleId()));
         var permissions = RedisUtils.getStringValue(rt, Set.class, key);
         if (permissions == null) {
-            var result = userRemoteApi.getUserPermissions(username);
+            var result = userRemoteApi.getUserPermissions(jwtInfo.getUsername());
 
             // 缓存
             if (result.getData() != null) {
