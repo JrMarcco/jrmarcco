@@ -54,10 +54,9 @@ public class GlobalInterceptor {
         log.info("### {} --- Request Url : [{}] ###", idThreadLocal.get(), request.getRequestURI());
 
         var signature = (MethodSignature) joinPoint.getSignature();
-        var method = signature.getMethod();
         var args = joinPoint.getArgs();
 
-        var methodInfo = MethodInfo.from(method, listMethodParam(signature), args);
+        var methodInfo = MethodInfo.from(signature.getMethod(), listMethodParam(signature), args);
 
         showMethodInfo(methodInfo);
 
