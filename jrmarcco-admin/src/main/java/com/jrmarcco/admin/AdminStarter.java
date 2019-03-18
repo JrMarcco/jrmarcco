@@ -3,7 +3,7 @@ package com.jrmarcco.admin;
 import com.jrmarcco.admin.config.ConfigPackage;
 import com.jrmarcco.admin.controller.ControllerPackage;
 import com.jrmarcco.common.config.global.GlobalExceptionHandler;
-import com.jrmarcco.common.interceptor.GlobalInterceptor;
+import com.jrmarcco.common.interceptor.ControllerInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,7 +20,7 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableDiscoveryClient
 @EnableFeignClients
 @ComponentScan(basePackageClasses = {ConfigPackage.class, ControllerPackage.class, GlobalExceptionHandler.class,
-        GlobalInterceptor.class})
+        ControllerInterceptor.class})
 public class AdminStarter {
 
     public static void main(String[] args) {

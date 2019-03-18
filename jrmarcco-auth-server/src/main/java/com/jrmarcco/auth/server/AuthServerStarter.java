@@ -6,7 +6,7 @@ import com.jrmarcco.auth.server.mapper.MapperPackage;
 import com.jrmarcco.auth.server.service.impl.ServiceImplPackage;
 import com.jrmarcco.common.config.global.GlobalExceptionHandler;
 import com.jrmarcco.common.config.redis.RedisConfiguration;
-import com.jrmarcco.common.interceptor.GlobalInterceptor;
+import com.jrmarcco.common.interceptor.ControllerInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -24,7 +24,7 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableDiscoveryClient
 @EnableFeignClients
 @ComponentScan(basePackageClasses = {ConfigPackage.class, ControllerPackage.class, ServiceImplPackage.class,
-        GlobalExceptionHandler.class, GlobalInterceptor.class, RedisConfiguration.class})
+        GlobalExceptionHandler.class, ControllerInterceptor.class, RedisConfiguration.class})
 @MapperScan(basePackageClasses = {MapperPackage.class})
 public class AuthServerStarter {
 

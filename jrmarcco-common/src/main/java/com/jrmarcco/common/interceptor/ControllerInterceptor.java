@@ -33,7 +33,7 @@ import java.util.concurrent.atomic.AtomicLong;
 @Aspect
 @Component
 @RequiredArgsConstructor
-public class GlobalInterceptor {
+public class ControllerInterceptor {
 
     private final ThreadLocal<Long> idThreadLocal = new ThreadLocal<>();
     private final AtomicLong idCreator = new AtomicLong();
