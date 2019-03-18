@@ -78,7 +78,7 @@ public class ControllerInterceptor {
 
         var parameters = signature.getMethod().getParameters();
         if (parameters.length > 0) {
-            String[] parameterNames = signature.getParameterNames();
+            var parameterNames = signature.getParameterNames();
             for (int i = 0; i < parameters.length; i++) {
                 methodParamList.add(MethodParam.of(i, parameterNames[i], parameters[i]));
             }
@@ -122,7 +122,7 @@ public class ControllerInterceptor {
             var size = methodParamList.size();
             assert size == args.length;
 
-            List<MethodDetail> details = new ArrayList<>();
+            var details = new ArrayList<MethodDetail>();
             for (int i = 0; i < size; i++) {
                 details.add(MethodDetail.of(methodParamList.get(i), args[i]));
             }
