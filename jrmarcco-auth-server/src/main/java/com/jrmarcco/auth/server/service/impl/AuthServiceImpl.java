@@ -87,8 +87,6 @@ public class AuthServiceImpl implements IAuthService {
                 }
             }
         } catch (ExpiredJwtException e) {
-            result.error(UaaError.ExpiredToken);
-        } catch (Exception e) {
             result.error(UaaError.InvalidToken);
         }
         return result;

@@ -14,9 +14,8 @@ import com.jrmarcco.common.exception.IServiceException;
 public enum UaaError implements IServiceException {
     Default("8000", "用户权限校验失败"),
     InvalidUser("8001", "用户名或密码错误，请重新输入"),
-    ExpiredToken("8002", "Token过期"),
-    InvalidToken("8003", "Token无效"),
-    PermissionDenied("8004", "访问拒绝，没有权限")
+    InvalidToken("8002", "Token无效"),
+    PermissionDenied("8003", "访问拒绝，没有权限")
     ;
 
     private String code;
