@@ -88,7 +88,6 @@ public class GlobalInterceptor {
     private void showMethodInfo(MethodInfo info) {
         var method = info.getMethod();
         var builder = new StringBuilder(method.getDeclaringClass().getSimpleName());
-        builder.append(" ");
         builder.append(method.getName());
 
         var methodDetails = info.getDetails();
