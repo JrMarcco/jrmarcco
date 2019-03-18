@@ -22,6 +22,7 @@ import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -37,7 +38,7 @@ public class GlobalInterceptor {
     private final ThreadLocal<Long> idThreadLocal = new ThreadLocal<>();
     private final AtomicLong idCreator = new AtomicLong();
 
-    @Pointcut("execution(public * *.controller.*.*(..))")
+    @Pointcut("execution(public * com.jrmarcco..controller.*.*(..))")
     public void matchController() {
     }
 
@@ -62,7 +63,8 @@ public class GlobalInterceptor {
 
         var start = System.nanoTime();
         var value = joinPoint.proceed(args);
-        log.info("### {} --- [{}] 接口耗时: [{}] ms ###", idThreadLocal.get(), request.getRequestURI(), System.nanoTime() - start);
+        log.info("### {} --- [{}] 接口耗时: [{}] ms ###", idThreadLocal.get(), request.getRequestURI(),
+                TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - start));
 
         return value;
     }
@@ -88,7 +90,7 @@ public class GlobalInterceptor {
     private void showMethodInfo(MethodInfo info) {
         var method = info.getMethod();
         var builder = new StringBuilder(method.getDeclaringClass().getSimpleName());
-        builder.append(method.getName());
+        builder.append(".").append(method.getName());
 
         var methodDetails = info.getDetails();
         builder.append("(");
