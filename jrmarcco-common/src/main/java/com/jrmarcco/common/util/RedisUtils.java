@@ -3,6 +3,7 @@ package com.jrmarcco.common.util;
 import com.jrmarcco.common.constant.RedisConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.util.StringUtils;
 
 import java.util.Optional;
 import java.util.Random;
@@ -30,7 +31,7 @@ public class RedisUtils {
         var expire = RedisConstants.DEFAULT_EXPIRE + new Random().nextInt(60);
         var jsonValue = JsonUtils.toJson(value);
         try {
-            if (jsonValue != null) {
+            if (!StringUtils.isEmpty(jsonValue)) {
                 rt.opsForValue().set(key, jsonValue, expire, TimeUnit.SECONDS);
             }
         } catch (Exception e) {
