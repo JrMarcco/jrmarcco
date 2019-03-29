@@ -44,7 +44,7 @@ public class RedisUtils {
     }
 
     /**
-     * 设置String缓存，默认过期时间30分钟 + 60秒内随机值。
+     * 设置String缓存。
      *
      * @param rt     StringRedisTemplate
      * @param key    redis-key
@@ -58,7 +58,7 @@ public class RedisUtils {
     }
 
     /**
-     * 设置String缓存，默认过期时间30分钟 + 60秒内随机值。
+     * 设置String缓存。
      *
      * @param rt       StringRedisTemplate
      * @param key      redis-key
