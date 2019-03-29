@@ -15,6 +15,7 @@ import java.io.IOException;
  * @author hongjc
  * @version 1.0  2019/1/11
  */
+@SuppressWarnings("WeakerAccess")
 @Slf4j
 public class JsonUtils {
 
