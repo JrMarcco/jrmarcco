@@ -20,7 +20,7 @@
         `id`, `username`, `password`, `nickname`, `gender`, `phone_number`, `avatar`, `email`, `role_id`, `create_time`, `update_time`, `is_deleted`
     </sql>
 
-    <select id="findByUsername" parameterType="java.lang.String" resultMap="baseResultMap">
+    <select id="selectByUsername" parameterType="java.lang.String" resultMap="baseResultMap">
         select
             <include refid="base_column_list" />
         from

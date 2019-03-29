@@ -10,5 +10,5 @@ import java.util.Set;
  */
 public interface SysPermissionMapper {
 
-    Set<SysPermission> findByUsername(String username);
+    Set<SysPermission> selectByUsername(String username);
 }

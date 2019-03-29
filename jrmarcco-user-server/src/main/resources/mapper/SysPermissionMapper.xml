@@ -15,7 +15,7 @@
         `id`, `name`, `url`, `type`, `menu_id`, `create_time`, `update_time`
     </sql>
 
-    <select id="findByUsername" parameterType="java.lang.String" resultMap="baseResultMap">
+    <select id="selectByUsername" parameterType="java.lang.String" resultMap="baseResultMap">
         select
             <include refid="base_column_list" />
         from

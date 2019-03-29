@@ -41,7 +41,7 @@ public class UserServiceImpl implements IUserService {
         var result = new BaseResult<ValidateUserResp>();
 
         // 校验用户名密码
-        var user = userMapper.findByUsername(req.getUsername());
+        var user = userMapper.selectByUsername(req.getUsername());
         if (user == null || !encoder.matches(req.getPassword(), user.getPassword())) {
             result.error(UaaError.InvalidUser);
         } else {
@@ -76,7 +76,7 @@ public class UserServiceImpl implements IUserService {
     //                                   Private Method
     // ====================================================================================================
     private Set<String> getPermissions(String username) {
-        return Optional.ofNullable(permissionMapper.findByUsername(username))
+        return Optional.ofNullable(permissionMapper.selectByUsername(username))
                 .orElse(Collections.emptySet())
                 .stream()
                 .map(SysPermission::getUrl)

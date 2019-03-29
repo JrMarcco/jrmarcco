@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface SysUserMapper {
 
-    SysUser findByUsername(String username);
+    SysUser selectByUsername(String username);
 
     List<SysUser> pageSelect(SysUser queryCondition);
 }
