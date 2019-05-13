@@ -19,7 +19,7 @@ import org.springframework.context.annotation.ComponentScan;
 @Slf4j
 @SpringBootApplication
 @EnableDiscoveryClient
-@ComponentScan(basePackageClasses = {ConfigPackage.class, ControllerPackage.class, ServiceImplPackage.class, GlobalExceptionHandler.class})
+@ComponentScan(basePackageClasses = {ConfigPackage.class, ControllerPackage.class, ServiceImplPackage.class})
 @MapperScan(basePackageClasses = {MapperPackage.class})
 public class UserServerStarter {
 

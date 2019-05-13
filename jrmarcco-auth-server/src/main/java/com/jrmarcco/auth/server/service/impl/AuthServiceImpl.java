@@ -12,9 +12,11 @@ import com.jrmarcco.auth.server.service.IAuthService;
 import com.jrmarcco.auth.server.util.JwtUtils;
 import com.jrmarcco.common.base.BaseResult;
 import com.jrmarcco.common.constant.BaseConstants;
+import com.jrmarcco.common.exception.ServiceException;
 import com.jrmarcco.common.exception.uaa.UaaError;
 import com.jrmarcco.common.util.RedisUtils;
 import com.jrmarcco.user.client.dto.ValidateUserReq;
+import com.jrmarcco.user.client.dto.ValidateUserResp;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -48,9 +50,8 @@ public class AuthServiceImpl implements IAuthService {
 
         var validateUserReq = new ValidateUserReq(req.getUsername(), req.getPassword());
 
-        var validateUserResult = userRemoteApi.validateUser(validateUserReq);
-        if (BaseConstants.RESULT_CODE_SUCCESS.equals(validateUserResult.getCode())) {
-            var validateUserResp = validateUserResult.getData();
+        try {
+            var validateUserResp = userRemoteApi.validateUser(validateUserReq);
             var user = validateUserResp.getUser();
 
             // 缓存用户权限信息
@@ -66,8 +67,8 @@ public class AuthServiceImpl implements IAuthService {
                     JwtUtils.generateToken(user.getUsername(), user.getRoleId(), jwtKey.getPrivateKey(), expire),
                     frontUser
             ));
-        } else {
-            BeanUtils.copyProperties(validateUserResult, result);
+        } catch (ServiceException e) {
+            result.error(e);
         }
 
         return result;
@@ -97,14 +98,14 @@ public class AuthServiceImpl implements IAuthService {
     // ====================================================================================================
     @SuppressWarnings("unchecked")
     private Set<String> getUserPermissions(JwtInfo jwtInfo) {
-        var  key = AuthRedisConstants.getPermissionKey(String.valueOf(jwtInfo.getRoleId()));
+        var key = AuthRedisConstants.getPermissionKey(String.valueOf(jwtInfo.getRoleId()));
         var permissions = RedisUtils.getStringValue(rt, Set.class, key);
         if (permissions == null) {
-            var result = userRemoteApi.getUserPermissions(jwtInfo.getUsername());
+            permissions = userRemoteApi.getUserPermissions(jwtInfo.getUsername());
 
             // 缓存
-            if (result.getData() != null) {
-                return RedisUtils.setStringValue(rt, key, result.getData());
+            if (permissions != null) {
+                return RedisUtils.setStringValue(rt, key, permissions);
             }
         }
         return permissions;

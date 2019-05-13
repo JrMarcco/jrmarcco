@@ -1,8 +1,8 @@
 package com.jrmarcco.user.client.api;
 
-import com.jrmarcco.common.base.BaseResult;
 import com.jrmarcco.common.base.PageData;
 import com.jrmarcco.common.base.PageQueryReq;
+import com.jrmarcco.common.exception.ServiceException;
 import com.jrmarcco.user.client.dto.ValidateUserReq;
 import com.jrmarcco.user.client.dto.ValidateUserResp;
 import com.jrmarcco.user.client.entity.SysUser;
@@ -18,11 +18,11 @@ import java.util.Set;
 public interface UserApi {
 
     @PostMapping("/validate")
-    BaseResult<ValidateUserResp> validateUser(@RequestBody ValidateUserReq req);
+    ValidateUserResp validateUser(@RequestBody ValidateUserReq req) throws ServiceException;
 
     @GetMapping("/getUserPermissions")
-    BaseResult<Set<String>> getUserPermissions(@RequestParam("username") String username);
+    Set<String> getUserPermissions(@RequestParam("username") String username);
 
     @PostMapping("/getUserPage")
-    BaseResult<PageData<SysUser>> getUserPage(@RequestBody PageQueryReq<SysUser> req);
+    PageData<SysUser> getUserPage(@RequestBody PageQueryReq<SysUser> req);
 }

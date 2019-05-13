@@ -3,6 +3,7 @@ package com.jrmarcco.user.server.controller;
 import com.jrmarcco.common.base.BaseResult;
 import com.jrmarcco.common.base.PageData;
 import com.jrmarcco.common.base.PageQueryReq;
+import com.jrmarcco.common.exception.ServiceException;
 import com.jrmarcco.user.client.api.UserApi;
 import com.jrmarcco.user.client.dto.ValidateUserReq;
 import com.jrmarcco.user.client.dto.ValidateUserResp;
@@ -31,18 +32,18 @@ public class UserController implements UserApi {
 
     @ApiOperation(value = "校验用户信息")
     @Override
-    public BaseResult<ValidateUserResp> validateUser(ValidateUserReq req) {
+    public ValidateUserResp validateUser(ValidateUserReq req) throws ServiceException {
         return userService.validateUser(req);
     }
 
     @ApiOperation(value = "获取用户权限信息")
     @Override
-    public BaseResult<Set<String>> getUserPermissions(@RequestParam("username") String username) {
+    public Set<String> getUserPermissions(@RequestParam("username") String username) {
         return userService.getUserPermissions(username);
     }
 
     @Override
-    public BaseResult<PageData<SysUser>> getUserPage(@RequestBody PageQueryReq<SysUser> req) {
+    public PageData<SysUser> getUserPage(@RequestBody PageQueryReq<SysUser> req) {
         return userService.getUserPage(req);
     }
 }

@@ -26,7 +26,7 @@ public class UserController {
 
     @PostMapping("/page")
     public BaseResult<PageData<SysUser>> page(@RequestBody PageQueryReq<SysUser> req) {
-        return userRemoteApi.getUserPage(req);
+        return new BaseResult<>(userRemoteApi.getUserPage(req));
     }
 
 }

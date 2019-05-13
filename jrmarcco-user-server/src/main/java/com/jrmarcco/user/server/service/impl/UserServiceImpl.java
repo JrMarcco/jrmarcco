@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.jrmarcco.common.base.BaseResult;
 import com.jrmarcco.common.base.PageData;
 import com.jrmarcco.common.base.PageQueryReq;
+import com.jrmarcco.common.exception.ServiceException;
 import com.jrmarcco.common.exception.uaa.UaaError;
 import com.jrmarcco.user.client.dto.ValidateUserReq;
 import com.jrmarcco.user.client.dto.ValidateUserResp;
@@ -37,39 +38,34 @@ public class UserServiceImpl implements IUserService {
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
     @Override
-    public BaseResult<ValidateUserResp> validateUser(ValidateUserReq req) {
-        var result = new BaseResult<ValidateUserResp>();
-
+    public ValidateUserResp validateUser(ValidateUserReq req) throws ServiceException {
         // 校验用户名密码
         var user = userMapper.selectByUsername(req.getUsername());
         if (user == null || !encoder.matches(req.getPassword(), user.getPassword())) {
-            result.error(UaaError.InvalidUser);
-        } else {
-            var validateUserResp = new ValidateUserResp(user);
+            throw new ServiceException(UaaError.InvalidUser);
+        }
+        var validateUserResp = new ValidateUserResp(user);
 
-            // 获取权限信息
-            var permissions = getPermissions(user.getUsername());
-            if (!CollectionUtils.isEmpty(permissions)) {
-                validateUserResp.setPermissions(permissions);
-            }
-
-            result.setData(validateUserResp);
+        // 获取权限信息
+        var permissions = getPermissions(user.getUsername());
+        if (!CollectionUtils.isEmpty(permissions)) {
+            validateUserResp.setPermissions(permissions);
         }
 
-        return result;
+        return validateUserResp;
     }
 
     @Override
-    public BaseResult<Set<String>> getUserPermissions(String username) {
-        return new BaseResult<>(getPermissions(username));
+    public Set<String> getUserPermissions(String username) {
+        return getPermissions(username);
     }
 
     @Override
-    public BaseResult<PageData<SysUser>> getUserPage(PageQueryReq<SysUser> req) {
+    public PageData<SysUser> getUserPage(PageQueryReq<SysUser> req) {
         PageHelper.startPage(req.getPageIndex(), req.getPageSize());
         var page = new PageInfo<>(userMapper.pageSelect(req.getQueryCondition()));
 
-        return new BaseResult<>(new PageData<>(page.getList(), page.getTotal()));
+        return new PageData<>(page.getList(), page.getTotal());
     }
 
     // ====================================================================================================
