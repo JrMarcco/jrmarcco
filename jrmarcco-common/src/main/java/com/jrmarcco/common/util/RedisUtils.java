@@ -4,7 +4,6 @@ import com.jrmarcco.common.constant.RedisConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 
 import java.util.Optional;
 import java.util.Random;

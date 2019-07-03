@@ -1,0 +1,7 @@
+18001 :: config-server
+18002 :: api-gateway
+18003 :: auth-server
+18004 :: zipkin-server
+18005 :: mqtt-server
+18100 :: user-server
+18200 :: admin

@@ -13,15 +13,19 @@
         <module>jrmarcco-common</module>
         <module>jrmarcco-config-server</module>
         <module>jrmarcco-zipkin-server</module>
+        <module>jrmarcco-api-gateway</module>
 
+        <module>jrmarcco-mqtt-server</module>
+
+        <!-- Auth -->
         <module>jrmarcco-auth-client</module>
-        <module>jrmarcco-user-client</module>
-
         <module>jrmarcco-auth-server</module>
+        <!-- User -->
+        <module>jrmarcco-user-client</module>
         <module>jrmarcco-user-server</module>
 
+        <!-- Front End -->
         <module>jrmarcco-admin</module>
-        <module>jrmarcco-api-gateway</module>
     </modules>
 
     <properties>
@@ -32,29 +36,31 @@
         <version.jrmarcco.auth>1.0-SNAPSHOT</version.jrmarcco.auth>
         <version.jrmarcco.user>1.0-SNAPSHOT</version.jrmarcco.user>
 
-        <version.spring>5.1.6.RELEASE</version.spring>
-        <version.spring.boot>2.1.4.RELEASE</version.spring.boot>
-        <version.spring.cloud>Greenwich.RELEASE</version.spring.cloud>
+        <version.spring>5.1.8.RELEASE</version.spring>
+        <version.spring.boot>2.1.6.RELEASE</version.spring.boot>
+        <version.spring.cloud>Greenwich.SR2</version.spring.cloud>
+
+        <version.netty>4.1.37.Final</version.netty>
 
         <version.swagger>1.5.22</version.swagger>
         <version.swagger2>2.9.2</version.swagger2>
 
-        <version.mysql.connector>8.0.15</version.mysql.connector>
+        <version.mysql.connector>8.0.16</version.mysql.connector>
         <version.mybatis>2.0.1</version.mybatis>
-        <version.pagehelper>5.1.8</version.pagehelper>
-        <version.druid>1.1.16</version.druid>
+        <version.pagehelper>5.1.10</version.pagehelper>
+        <version.druid>1.1.18</version.druid>
 
-        <version.jackson>2.9.8</version.jackson>
+        <version.jackson>2.9.9</version.jackson>
 
-        <version.httpclient>4.5.8</version.httpclient>
+        <version.httpclient>4.5.9</version.httpclient>
 
-        <version.commons.pool2>2.6.1</version.commons.pool2>
+        <version.commons.pool2>2.6.2</version.commons.pool2>
 
         <version.jjwt>0.10.5</version.jjwt>
 
         <version.logback>1.2.3</version.logback>
-        <version.slf4j>1.7.25</version.slf4j>
-        <version.lombok>1.18.6</version.lombok>
+        <version.slf4j>1.7.26</version.slf4j>
+        <version.lombok>1.18.8</version.lombok>
     </properties>
 
     <dependencyManagement>
@@ -83,6 +89,13 @@
                 <version>${version.spring.cloud}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- Netty Dependency -->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${version.netty}</version>
             </dependency>
 
             <!-- Swagger Dependency -->

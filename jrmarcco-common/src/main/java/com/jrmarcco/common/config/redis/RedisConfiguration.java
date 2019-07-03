@@ -11,7 +11,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * @author hongjc
  * @version 1.0  2019/2/25
  */
-@SuppressWarnings("SpringFacetCodeInspection")
 @Configuration
 public class RedisConfiguration {
     @Bean
