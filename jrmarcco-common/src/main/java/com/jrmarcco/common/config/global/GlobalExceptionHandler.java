@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(value = Exception.class)
-    public BaseResult handleException(Exception e) {
+    public BaseResult<Void> handleException(Exception e) {
         log.error("### {} ###", e.getMessage(), e);
         return new BaseResult<Void>().error(SysError.Default);
     }
