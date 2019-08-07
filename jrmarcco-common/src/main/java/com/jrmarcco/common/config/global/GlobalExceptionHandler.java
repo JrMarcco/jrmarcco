@@ -25,6 +25,13 @@ public class GlobalExceptionHandler {
         return new BaseResult<Void>().error(e);
     }
 
+    @ExceptionHandler(value = IllegalArgumentException.class)
+    public BaseResult<Void> handleIllegalArgumentException(IllegalArgumentException e) {
+        log.error("### {} ###", e.getMessage(), e);
+
+        return new BaseResult<Void>().error(SysError.Default.getErrorCode(), e.getMessage());
+    }
+
     @ExceptionHandler(value = Exception.class)
     public BaseResult<Void> handleException(Exception e) {
         log.error("### {} ###", e.getMessage(), e);
