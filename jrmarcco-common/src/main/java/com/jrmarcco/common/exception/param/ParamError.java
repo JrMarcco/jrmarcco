@@ -16,8 +16,8 @@ import com.jrmarcco.common.exception.IServiceException;
 public enum ParamError implements IServiceException {
     Default("1000", "输入的参数有误");
 
-    private String code;
-    private String message;
+    private final String code;
+    private final String message;
 
     ParamError(String code, String message) {
         this.code = code;

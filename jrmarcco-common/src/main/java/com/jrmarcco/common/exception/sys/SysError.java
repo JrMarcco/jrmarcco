@@ -13,8 +13,8 @@ public enum SysError implements IServiceException {
     TimeOut("9000", "服务器连接超时")
     ;
 
-    private String code;
-    private String message;
+    private final String code;
+    private final String message;
 
     SysError(String code, String message) {
         this.code = code;

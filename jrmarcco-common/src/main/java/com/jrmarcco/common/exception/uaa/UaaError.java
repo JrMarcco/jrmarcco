@@ -18,8 +18,8 @@ public enum UaaError implements IServiceException {
     PermissionDenied("8003", "访问拒绝，没有权限")
     ;
 
-    private String code;
-    private String message;
+    private final String code;
+    private final String message;
 
     UaaError(String code, String message) {
         this.code = code;
