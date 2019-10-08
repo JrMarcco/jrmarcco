@@ -35,12 +35,12 @@ public class BaseResult<T> implements Serializable {
 
     public BaseResult() {
         this.code = BaseConstants.RESULT_CODE_SUCCESS;
-        this.message = "";
+        this.message = BaseConstants.RESULT_MSG_SUCCESS;
     }
 
     public BaseResult(T data) {
         this.code = BaseConstants.RESULT_CODE_SUCCESS;
-        this.message = "";
+        this.message = BaseConstants.RESULT_MSG_SUCCESS;
         this.data = data;
     }
 

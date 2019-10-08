@@ -13,4 +13,6 @@ package com.jrmarcco.common.constant;
 public interface BaseConstants {
     /** 调用成功标识 */
     String RESULT_CODE_SUCCESS = "0000";
+    /** 调用成功消息 */
+    String RESULT_MSG_SUCCESS = "success";
 }
