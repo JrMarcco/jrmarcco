@@ -40,7 +40,7 @@
         <version.spring.boot>2.1.6.RELEASE</version.spring.boot>
         <version.spring.cloud>Greenwich.SR2</version.spring.cloud>
 
-        <version.netty>4.1.37.Final</version.netty>
+        <version.netty>4.1.42.Final</version.netty>
 
         <version.swagger>1.5.22</version.swagger>
         <version.swagger2>2.9.2</version.swagger2>
