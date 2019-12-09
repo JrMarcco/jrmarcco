@@ -2,10 +2,9 @@ package com.jrmarcco.user.server.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.jrmarcco.common.base.BaseResult;
 import com.jrmarcco.common.base.PageData;
 import com.jrmarcco.common.base.PageQueryReq;
-import com.jrmarcco.common.exception.ServiceException;
+import com.jrmarcco.common.exception.BusinessException;
 import com.jrmarcco.common.exception.uaa.UaaError;
 import com.jrmarcco.user.client.dto.ValidateUserReq;
 import com.jrmarcco.user.client.dto.ValidateUserResp;
@@ -38,11 +37,11 @@ public class UserServiceImpl implements IUserService {
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
     @Override
-    public ValidateUserResp validateUser(ValidateUserReq req) throws ServiceException {
+    public ValidateUserResp validateUser(ValidateUserReq req) throws BusinessException {
         // 校验用户名密码
         var user = userMapper.selectByUsername(req.getUsername());
         if (user == null || !encoder.matches(req.getPassword(), user.getPassword())) {
-            throw new ServiceException(UaaError.InvalidUser);
+            throw new BusinessException(UaaError.InvalidUser);
         }
         var validateUserResp = new ValidateUserResp(user);
 

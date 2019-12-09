@@ -1,9 +1,8 @@
 package com.jrmarcco.user.server.service;
 
-import com.jrmarcco.common.base.BaseResult;
 import com.jrmarcco.common.base.PageData;
 import com.jrmarcco.common.base.PageQueryReq;
-import com.jrmarcco.common.exception.ServiceException;
+import com.jrmarcco.common.exception.BusinessException;
 import com.jrmarcco.user.client.dto.ValidateUserReq;
 import com.jrmarcco.user.client.dto.ValidateUserResp;
 import com.jrmarcco.user.client.entity.SysUser;
@@ -16,7 +15,7 @@ import java.util.Set;
  */
 public interface IUserService {
 
-    ValidateUserResp validateUser(ValidateUserReq req) throws ServiceException;
+    ValidateUserResp validateUser(ValidateUserReq req) throws BusinessException;
 
     Set<String> getUserPermissions(String username);
 

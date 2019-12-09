@@ -1,6 +1,6 @@
 package com.jrmarcco.common.interceptor;
 
-import com.jrmarcco.common.exception.ServiceException;
+import com.jrmarcco.common.exception.BusinessException;
 import com.jrmarcco.common.exception.sys.SysError;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -48,7 +48,7 @@ public class ControllerInterceptor {
 
         var requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         if (requestAttributes == null) {
-            throw new ServiceException(SysError.Default);
+            throw new BusinessException(SysError.Default);
         }
 
         var request = requestAttributes.getRequest();

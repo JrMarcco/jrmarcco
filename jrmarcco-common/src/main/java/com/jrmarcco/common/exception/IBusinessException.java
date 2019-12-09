@@ -10,7 +10,7 @@ package com.jrmarcco.common.exception;
  * @author jrmarcco
  * @version 1.0  2018/3/28
  */
-public interface IServiceException {
+public interface IBusinessException {
 
     /**
      * 获取业务错误编码。

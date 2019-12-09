@@ -5,8 +5,8 @@
 package com.jrmarcco.common.base;
 
 import com.jrmarcco.common.constant.BaseConstants;
-import com.jrmarcco.common.exception.IServiceException;
-import com.jrmarcco.common.exception.ServiceException;
+import com.jrmarcco.common.exception.IBusinessException;
+import com.jrmarcco.common.exception.BusinessException;
 import com.jrmarcco.common.exception.sys.SysError;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -50,13 +50,13 @@ public class BaseResult<T> implements Serializable {
         return this;
     }
 
-    public BaseResult<T> error(IServiceException err) {
+    public BaseResult<T> error(IBusinessException err) {
         this.code = err.getErrorCode();
         this.message = err.getErrorMessage();
         return this;
     }
 
-    public BaseResult<T> error(ServiceException e) {
+    public BaseResult<T> error(BusinessException e) {
         this.code = e.getExceptionCode();
         this.message = e.getExceptionMessage();
         return this;

@@ -5,7 +5,7 @@
 package com.jrmarcco.common.exception.param;
 
 
-import com.jrmarcco.common.exception.IServiceException;
+import com.jrmarcco.common.exception.IBusinessException;
 
 /**
  * 自定义输入参数错误信息。
@@ -13,7 +13,7 @@ import com.jrmarcco.common.exception.IServiceException;
  * @author jrmarcco
  * @version 1.0  2018/3/28
  */
-public enum ParamError implements IServiceException {
+public enum ParamError implements IBusinessException {
     Default("1000", "输入的参数有误");
 
     private final String code;

@@ -1,6 +1,6 @@
 package com.jrmarcco.common.exception.sys;
 
-import com.jrmarcco.common.exception.IServiceException;
+import com.jrmarcco.common.exception.IBusinessException;
 
 /**
  * 自定义系统异常信息。
@@ -8,7 +8,7 @@ import com.jrmarcco.common.exception.IServiceException;
  * @author hongjc
  * @version 1.0  2019/1/17
  */
-public enum SysError implements IServiceException {
+public enum SysError implements IBusinessException {
     Default("9999", "服务器异常"),
     TimeOut("9000", "服务器连接超时")
     ;

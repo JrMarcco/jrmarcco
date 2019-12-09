@@ -11,12 +11,10 @@ import com.jrmarcco.auth.server.remote.UserRemoteApi;
 import com.jrmarcco.auth.server.service.IAuthService;
 import com.jrmarcco.auth.server.util.JwtUtils;
 import com.jrmarcco.common.base.BaseResult;
-import com.jrmarcco.common.constant.BaseConstants;
-import com.jrmarcco.common.exception.ServiceException;
+import com.jrmarcco.common.exception.BusinessException;
 import com.jrmarcco.common.exception.uaa.UaaError;
 import com.jrmarcco.common.util.RedisUtils;
 import com.jrmarcco.user.client.dto.ValidateUserReq;
-import com.jrmarcco.user.client.dto.ValidateUserResp;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -67,7 +65,7 @@ public class AuthServiceImpl implements IAuthService {
                     JwtUtils.generateToken(user.getUsername(), user.getRoleId(), jwtKey.getPrivateKey(), expire),
                     frontUser
             ));
-        } catch (ServiceException e) {
+        } catch (BusinessException e) {
             result.error(e);
         }
 

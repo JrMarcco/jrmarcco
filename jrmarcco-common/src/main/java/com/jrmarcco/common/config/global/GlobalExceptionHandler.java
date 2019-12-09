@@ -1,7 +1,7 @@
 package com.jrmarcco.common.config.global;
 
 import com.jrmarcco.common.base.BaseResult;
-import com.jrmarcco.common.exception.ServiceException;
+import com.jrmarcco.common.exception.BusinessException;
 import com.jrmarcco.common.exception.sys.SysError;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ResponseBody
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(value = ServiceException.class)
-    public BaseResult<Void> handleServiceException(ServiceException e) {
+    @ExceptionHandler(value = BusinessException.class)
+    public BaseResult<Void> handleServiceException(BusinessException e) {
         log.error("### [{}] {} ###", e.getExceptionCode(), e.getExceptionMessage());
         return new BaseResult<Void>().error(e);
     }

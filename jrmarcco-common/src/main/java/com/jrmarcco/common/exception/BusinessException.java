@@ -10,16 +10,16 @@ package com.jrmarcco.common.exception;
  * @author jrmarcco
  * @version 1.0  2018/3/28
  */
-public class ServiceException extends Exception {
+public class BusinessException extends Exception {
     private static final long serialVersionUID = 3588383826896528532L;
 
-    private IServiceException exceptionType;
+    private IBusinessException exceptionType;
 
-    public ServiceException(IServiceException exceptionType) {
+    public BusinessException(IBusinessException exceptionType) {
         this.exceptionType = exceptionType;
     }
 
-    public ServiceException(String msg) {
+    public BusinessException(String msg) {
         super(msg);
     }
 

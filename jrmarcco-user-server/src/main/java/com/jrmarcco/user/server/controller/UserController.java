@@ -1,9 +1,8 @@
 package com.jrmarcco.user.server.controller;
 
-import com.jrmarcco.common.base.BaseResult;
 import com.jrmarcco.common.base.PageData;
 import com.jrmarcco.common.base.PageQueryReq;
-import com.jrmarcco.common.exception.ServiceException;
+import com.jrmarcco.common.exception.BusinessException;
 import com.jrmarcco.user.client.api.UserApi;
 import com.jrmarcco.user.client.dto.ValidateUserReq;
 import com.jrmarcco.user.client.dto.ValidateUserResp;
@@ -32,7 +31,7 @@ public class UserController implements UserApi {
 
     @ApiOperation(value = "校验用户信息")
     @Override
-    public ValidateUserResp validateUser(ValidateUserReq req) throws ServiceException {
+    public ValidateUserResp validateUser(ValidateUserReq req) throws BusinessException {
         return userService.validateUser(req);
     }
 
