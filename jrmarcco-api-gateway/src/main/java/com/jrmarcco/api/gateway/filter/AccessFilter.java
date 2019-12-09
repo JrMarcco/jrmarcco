@@ -21,6 +21,7 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 /**
@@ -98,7 +99,7 @@ public class AccessFilter implements GlobalFilter, Ordered {
             return paramList.get(0);
         } else {
             var token = headerList.get(0);
-            mutateRequestBuilder.header(gatewayConfiguration.getTokenHeader(), token);
+            mutateRequestBuilder.header(gatewayConfiguration.getTokenHeader(), new String[] {token});
             return token;
         }
     }

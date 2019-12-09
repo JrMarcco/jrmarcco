@@ -5,10 +5,9 @@
 package com.jrmarcco.common.base;
 
 import com.jrmarcco.common.constant.BaseConstants;
-import com.jrmarcco.common.exception.IBusinessException;
 import com.jrmarcco.common.exception.BusinessException;
+import com.jrmarcco.common.exception.IBusinessException;
 import com.jrmarcco.common.exception.sys.SysError;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -20,7 +19,6 @@ import java.io.Serializable;
  * @version 1.0  2017/12/25
  */
 @Data
-@AllArgsConstructor
 public class BaseResult<T> implements Serializable {
 
     private static final long serialVersionUID = -3947021072109706145L;
