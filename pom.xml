@@ -36,7 +36,7 @@
         <version.jrmarcco.auth>1.0-SNAPSHOT</version.jrmarcco.auth>
         <version.jrmarcco.user>1.0-SNAPSHOT</version.jrmarcco.user>
 
-        <version.spring>5.1.8.RELEASE</version.spring>
+        <version.spring>5.1.18.RELEASE</version.spring>
         <version.spring.boot>2.1.6.RELEASE</version.spring.boot>
         <version.spring.cloud>Greenwich.SR2</version.spring.cloud>
 
